@@ -4,6 +4,7 @@ import { useState } from "react";
 import ContactsList from "./ContactsList";
 
 const Contacts = () => {
+  const [alert, setAlert] = useState("");
   const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState({
     name: "",
@@ -19,6 +20,17 @@ const Contacts = () => {
   };
 
   const addHandler = () => {
+    if (
+      !contact.name ||
+      !contact.lastName ||
+      !contact.email ||
+      !contact.phone
+    ) {
+      setAlert("All fields must be filled out");
+      return;
+    }
+    
+    setAlert("");
     setContacts((contacts) => [...contacts, contact]);
     setContact({
       name: "",
@@ -61,6 +73,9 @@ const Contacts = () => {
         />
         <button onClick={addHandler}>Add Contact</button>
       </div>
+
+      <div>{alert && <p>{alert}</p>}</div>
+
       <ContactsList contacts={contacts} />
     </div>
   );
