@@ -1,4 +1,8 @@
-const ContactItem = ({ data: { id, name, lastName, email, phone } }) => {
+/* eslint-disable react/prop-types */
+const ContactItem = ({
+  data: { id, name, lastName, email, phone },
+  deleteHandler,
+}) => {
   return (
     <li key={id}>
       <p>
@@ -10,7 +14,7 @@ const ContactItem = ({ data: { id, name, lastName, email, phone } }) => {
       <p>
         <span>📞</span> {phone}
       </p>
-      <button>🗑</button>
+      <button onClick={() => deleteHandler(id)}>🗑</button>
     </li>
   );
 };
